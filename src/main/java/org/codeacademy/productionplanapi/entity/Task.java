@@ -6,7 +6,7 @@ import org.codeacademy.productionplanapi.enums.Priority;
 import org.codeacademy.productionplanapi.enums.ProductionStage;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Task {
@@ -14,24 +14,36 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User userId;
+
+    @ManyToOne
+    @JoinColumn(name= "director_id")
+    private Director director;
+
+    @ManyToOne
+    @JoinColumn(name = "editor_id")
+    private Editor editor;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<TaskPostTime> postTimes;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "test_id")
+    private TestInformation test;
+
+    @Enumerated(EnumType.STRING)
     private PostStatus status;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Director directorId;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Editor editorId;
+    @Enumerated(EnumType.STRING)
     private ProductionStage stage;
-    private String compilationName;
+    @Enumerated(EnumType.STRING)
     private Priority priority;
+    private String compilationName;
     private LocalDate filmingStart;
     private LocalDate editStart;
-    private LocalDateTime postDateTimeOne;
-    private LocalDateTime postDateTimeTwo;
-    private LocalDateTime postDateTimeThree;
     private String referenceLink;
     private String comment;
-    @OneToOne(cascade = CascadeType.ALL)
-    private TestInformation testId;
 
 }

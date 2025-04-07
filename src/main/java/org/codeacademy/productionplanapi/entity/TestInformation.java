@@ -1,9 +1,9 @@
 package org.codeacademy.productionplanapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class TestInformation {
@@ -11,10 +11,8 @@ public class TestInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String v1;
-    private String v2;
-    private String v3;
-    private String v4;
-    private String v5;
+
+    @OneToMany(mappedBy = "testInformation", cascade = CascadeType.ALL)
+    private List<TestValue> values = new ArrayList<>();
 
 }
