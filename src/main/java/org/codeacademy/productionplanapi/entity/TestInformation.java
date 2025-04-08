@@ -10,7 +10,7 @@ public class TestInformation {
     private Long id;
 
     private String version;
-    private String time;
+    private String timeName; // 3s, 15s, 30s,
     private Double timeValue;
 
     @ManyToOne
