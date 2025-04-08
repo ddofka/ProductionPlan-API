@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Task {
+public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +27,8 @@ public class Task {
     @JoinColumn(name = "editor_id")
     private Editor editor;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    private List<TaskPostTime> postTimes;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "test_id")
-    private TestInformation test;
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    private List<Release> releases;
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
@@ -40,6 +36,7 @@ public class Task {
     private ProductionStage stage;
     @Enumerated(EnumType.STRING)
     private Priority priority;
+
     private String compilationName;
     private LocalDate filmingStart;
     private LocalDate editStart;

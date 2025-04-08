@@ -2,9 +2,6 @@ package org.codeacademy.productionplanapi.entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 public class TestInformation {
 
@@ -12,7 +9,12 @@ public class TestInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "testInformation", cascade = CascadeType.ALL)
-    private List<TestValue> values = new ArrayList<>();
+    private String version;
+    private String time;
+    private Double timeValue;
+
+    @ManyToOne
+    @JoinColumn(name = "video_id")
+    private Video video;
 
 }

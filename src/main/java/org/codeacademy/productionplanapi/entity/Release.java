@@ -4,17 +4,17 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class TaskPostTime {
+public class Release {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+    @JoinColumn(name = "video_id")
+    private Video video;
 
-    private LocalDateTime postDateTime;
+    private LocalDateTime releaseDateTime;
     private Integer sequence;
 
 }
