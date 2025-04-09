@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TestInformationRepository extends JpaRepository<TestInformation, Long> {
-    Page<TestInformation> findAllByTimeName(String timeName, Pageable pageable);
-    Page<TestInformation> findAllByVideo_IdAndTimeName(Long videoId, String timeName, Pageable pageable);
+    Page<TestInformation> findAllByRetentionTime(String timeName, Pageable pageable);
+    Page<TestInformation> findAllByVideo_IdAndRetentionTime(Long videoId, String timeName, Pageable pageable);
 }

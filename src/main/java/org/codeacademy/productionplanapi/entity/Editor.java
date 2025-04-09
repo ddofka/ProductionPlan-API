@@ -19,5 +19,5 @@ public class Editor {
     private Long id;
 
     private String name;
-    private boolean freelancer;
+    private boolean isFreelancer;
 }

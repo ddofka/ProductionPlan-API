@@ -21,21 +21,4 @@ public class DirectorService {
                 .orElseThrow(() -> new DirectorNotFoundException("id=" + id));
     }
 
-    public void addTestDirector(){
-        Director director = new Director();
-        director.setName("Sebastian");
-        director.setCountry("Columbia");
-        addDirector(director);
-
-        Director directorTwo = new Director();
-        directorTwo.setName("Paulius");
-        directorTwo.setCountry("Lithuania");
-        addDirector(directorTwo);
-
-        Director directorThree = new Director();
-        directorThree.setName("Sandji");
-        directorThree.setCountry("India");
-        addDirector(directorThree);
-    }
-
 }

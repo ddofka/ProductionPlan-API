@@ -23,6 +23,6 @@ public class Release {
     private Video video;
 
     private LocalDateTime releaseDateTime;
-    private Integer sequence;
+    private Integer part;
 
 }

@@ -39,16 +39,17 @@ public class Video {
     @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
     private List<TestInformation> tests;
 
-    @Enumerated(EnumType.STRING)
-    private PostStatus status;
+    private LocalDate filmingStart;
+    private LocalDate editStart;
+
     @Enumerated(EnumType.STRING)
     private ProductionStage stage;
+    @Enumerated(EnumType.STRING)
+    private PostStatus status;
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
     private String compilationName;
-    private LocalDate filmingStart;
-    private LocalDate editStart;
     private String referenceLink;
     private String comment;
 

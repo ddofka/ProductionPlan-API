@@ -16,8 +16,8 @@ public class TestInformation {
     private Long id;
 
     private String version;
-    private String timeName; // 3s, 15s, 30s,
-    private Double timeValue;
+    private String retentionTime; // 3s, 15s, 30s,
+    private Double retentionValue;
 
     @ManyToOne
     @JoinColumn(name = "video_id")

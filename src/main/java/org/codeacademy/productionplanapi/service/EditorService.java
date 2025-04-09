@@ -21,15 +21,4 @@ public class EditorService {
                 .orElseThrow(() -> new EditorNotFoundException("id=" + id));
     }
 
-    public void addTestEditor(){
-        Editor editor = new Editor();
-        editor.setName("Dovydas");
-        addEditor(editor);
-
-        Editor editorOne = new Editor();
-        editorOne.setName("Linas");
-        editorOne.setFreelancer(true);
-        addEditor(editorOne);
-    }
-
 }
