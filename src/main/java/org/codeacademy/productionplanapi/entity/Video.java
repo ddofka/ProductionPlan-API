@@ -1,6 +1,9 @@
 package org.codeacademy.productionplanapi.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.codeacademy.productionplanapi.enums.PostStatus;
 import org.codeacademy.productionplanapi.enums.Priority;
 import org.codeacademy.productionplanapi.enums.ProductionStage;
@@ -9,6 +12,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@ToString
 public class Video {
 
     @Id
@@ -17,7 +23,7 @@ public class Video {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name= "director_id")
@@ -30,16 +36,20 @@ public class Video {
     @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
     private List<Release> releases;
 
-    @Enumerated(EnumType.STRING)
-    private PostStatus status;
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    private List<TestInformation> tests;
+
+    private LocalDate filmingStart;
+    private LocalDate editStart;
+
     @Enumerated(EnumType.STRING)
     private ProductionStage stage;
+    @Enumerated(EnumType.STRING)
+    private PostStatus status;
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
     private String compilationName;
-    private LocalDate filmingStart;
-    private LocalDate editStart;
     private String referenceLink;
     private String comment;
 

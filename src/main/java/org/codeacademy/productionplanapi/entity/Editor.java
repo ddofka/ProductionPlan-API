@@ -4,8 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@ToString
 public class Editor {
 
     @Id
@@ -13,5 +19,5 @@ public class Editor {
     private Long id;
 
     private String name;
-    private boolean freelancer;
+    private boolean isFreelancer;
 }
