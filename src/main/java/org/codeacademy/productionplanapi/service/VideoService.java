@@ -7,6 +7,8 @@ import org.codeacademy.productionplanapi.exception.VideoNotFoundException;
 import org.codeacademy.productionplanapi.repository.VideoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +18,10 @@ public class VideoService {
 
     public Video addVideo(Video video) {
         return videoRepository.saveAndFlush(video);
+    }
+
+    public List<Video> getAllVideos() {
+        return videoRepository.findAll();
     }
 
     public Video getVideoById(Long id) {
