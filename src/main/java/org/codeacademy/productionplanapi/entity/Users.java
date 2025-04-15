@@ -10,7 +10,8 @@ import org.codeacademy.productionplanapi.enums.Role;
 @Getter
 @Setter
 @ToString
-public class User {
+@Table(name = "user")
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

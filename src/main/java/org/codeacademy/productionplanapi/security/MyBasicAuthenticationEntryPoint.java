@@ -24,7 +24,7 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
 
     @Override
     public void afterPropertiesSet() {
-        setRealmName("SiuntupristatymasAPI");
+        setRealmName("ProductionPlanAPI");
         super.afterPropertiesSet();
     }
 

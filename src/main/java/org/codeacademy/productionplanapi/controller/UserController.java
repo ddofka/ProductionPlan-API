@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.codeacademy.productionplanapi.dto.create.CreateUserRequest;
 import org.codeacademy.productionplanapi.dto.get.GetUserResponse;
-import org.codeacademy.productionplanapi.entity.User;
+import org.codeacademy.productionplanapi.entity.Users;
 import org.codeacademy.productionplanapi.mapper.UserMapper;
 import org.codeacademy.productionplanapi.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class UserController {
     @ApiResponse(responseCode = "400", description = "Invalid request body")
     @PostMapping("/register")
     public ResponseEntity<GetUserResponse> registerUser(@Valid @RequestBody CreateUserRequest request) {
-        User savedUser = userService.addUser(userMapper.dtoToUser(request, passwordEncoder));
+        Users savedUser = userService.addUser(userMapper.dtoToUser(request, passwordEncoder));
         GetUserResponse response = userMapper.userToDto(savedUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
