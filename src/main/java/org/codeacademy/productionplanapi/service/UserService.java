@@ -4,13 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.codeacademy.productionplanapi.entity.Users;
 import org.codeacademy.productionplanapi.enums.Role;
 import org.codeacademy.productionplanapi.exception.EmailAlreadyExistsException;
-import org.codeacademy.productionplanapi.exception.UserNotFoundException;
 import org.codeacademy.productionplanapi.exception.UsernameAlreadyExistsException;
 import org.codeacademy.productionplanapi.repository.UserRepository;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
