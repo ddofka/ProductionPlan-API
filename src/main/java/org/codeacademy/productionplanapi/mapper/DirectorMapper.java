@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface DirectorMapper {
 
-    GetDirectorResponse dtoToGetDirector(CreateDirectorRequest request);
+    GetDirectorResponse directorToDto(Director director);
 
     List<GetDirectorResponse> directorsListToDto(List<Director> directors);
 

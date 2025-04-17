@@ -6,6 +6,8 @@ import org.codeacademy.productionplanapi.exception.DirectorNotFoundException;
 import org.codeacademy.productionplanapi.repository.DirectorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DirectorService {
@@ -21,4 +23,14 @@ public class DirectorService {
                 .orElseThrow(() -> new DirectorNotFoundException("id=" + id));
     }
 
+    public List<Director> getAllDirectors() {
+        return directorRepository.findAll();
+    }
+
+    public void removeDirectorById(Long id) {
+        if(!directorRepository.existsById(id)) {
+            throw new DirectorNotFoundException("Director with id: " + id + " not found");
+        }
+        directorRepository.deleteById(id);
+    }
 }
