@@ -11,6 +11,7 @@ public record GetVideoResponse(
 
         List<GetReleaseResponse> releases,
         List<GetTestInformationResponse> tests,
+        Long id,
         GetDirectorResponse director,
         GetEditorResponse editor,
         LocalDate filmingStart,

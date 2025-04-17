@@ -1,4 +1,4 @@
-package org.codeacademy.productionplanapi.dto;
+package org.codeacademy.productionplanapi.dto.create;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

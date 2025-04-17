@@ -31,7 +31,7 @@ public class UserController {
     @ApiResponse(responseCode = "400", description = "Invalid request body")
     @PostMapping("/register")
     public ResponseEntity<GetUserResponse> registerUser(@Valid @RequestBody CreateUserRequest request) {
-        Users savedUser = userService.addUser(userMapper.dtoToUser(request, passwordEncoder));
+        Users savedUser = userService.register(userMapper.dtoToUser(request, passwordEncoder));
         GetUserResponse response = userMapper.userToDto(savedUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

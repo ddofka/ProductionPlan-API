@@ -14,5 +14,5 @@ public interface TestInformationMapper {
 
     List<GetTestInformationResponse> testInformationListToDto(List<TestInformation> tests);
 
-    TestInformation dtoToTestInformation(CreateTestInformationRequest request);
+    List<TestInformation> dtoToTestInformation(List<CreateTestInformationRequest> request);
 }

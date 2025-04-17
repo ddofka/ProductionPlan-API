@@ -14,6 +14,6 @@ public interface ReleaseMapper {
 
     List<GetReleaseResponse> releaseListToDto(List<Release> releases);
 
-    Release dtoToRelease(CreateReleaseRequest request);
+    List<Release> dtoToRelease(List<CreateReleaseRequest> request);
 
 }
