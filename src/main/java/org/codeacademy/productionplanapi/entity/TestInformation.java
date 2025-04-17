@@ -15,7 +15,7 @@ public class TestInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String version;
+    private String version; // V1, V2, V3
     private String retentionTime; // 3s, 15s, 30s,
     private Double retentionValue;
 

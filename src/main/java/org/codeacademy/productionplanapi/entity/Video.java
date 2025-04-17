@@ -23,7 +23,7 @@ public class Video {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users users;
 
     @ManyToOne
     @JoinColumn(name= "director_id")
@@ -33,10 +33,10 @@ public class Video {
     @JoinColumn(name = "editor_id")
     private Editor editor;
 
-    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Release> releases;
 
-    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TestInformation> tests;
 
     private LocalDate filmingStart;

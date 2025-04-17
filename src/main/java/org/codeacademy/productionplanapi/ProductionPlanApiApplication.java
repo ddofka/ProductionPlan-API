@@ -1,11 +1,12 @@
 package org.codeacademy.productionplanapi;
 
-import lombok.RequiredArgsConstructor;
+import org.codeacademy.productionplanapi.security.JwtService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 @SpringBootApplication
-@RequiredArgsConstructor
+@EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
 public class ProductionPlanApiApplication {
 
     public static void main(String[] args) {
