@@ -1,0 +1,892 @@
+{
+	"info": {
+		"_postman_id": "4b32f14c-4107-4ad8-b8f3-3f7c824aad82",
+		"name": "ProductionPlan - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42903043"
+	},
+	"item": [
+		{
+			"name": "Video",
+			"item": [
+				{
+					"name": "get filtered videos paged",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>Release DateTime</th>",
+									"        <th>Part</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.0.releases}}",
+									"        <tr>",
+									"            <td>{{releaseDateTime}}</td>",
+									"            <td>{{part}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"",
+									"    <tr>",
+									"        <th>Version</th>",
+									"        <th>Retention Time</th>",
+									"        <th>Retention Value</th>",
+									"    </tr>",
+									"",
+									"    {{#each response.0.tests}}",
+									"        <tr>",
+									"            <td>{{version}}</td>",
+									"            <td>{{retentionTime}}</td>",
+									"            <td>{{retentionValue}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"",
+									"    <tr>",
+									"        <th>Director Name</th>",
+									"        <th>Country</th>",
+									"    </tr>",
+									"    ",
+									"    <tr>",
+									"        <td>{{response.0.director.name}}</td>",
+									"        <td>{{response.0.director.country}}</td>",
+									"    </tr>",
+									"",
+									"    <tr>",
+									"        <th>Editor Name</th>",
+									"        <th>Is Freelancer</th>",
+									"    </tr>",
+									"    ",
+									"    <tr>",
+									"        <td>{{response.0.editor.name}}</td>",
+									"        <td>{{response.0.editor.isFreelancer}}</td>",
+									"    </tr>",
+									"",
+									"    <tr>",
+									"        <th>Filming Start</th>",
+									"        <th>Edit Start</th>",
+									"        <th>Stage</th>",
+									"        <th>Status</th>",
+									"    </tr>",
+									"    ",
+									"    <tr>",
+									"        <td>{{response.0.filmingStart}}</td>",
+									"        <td>{{response.0.editStart}}</td>",
+									"        <td>{{response.0.stage}}</td>",
+									"        <td>{{response.0.status}}</td>",
+									"    </tr>",
+									"",
+									"    <tr>",
+									"        <th>Priority</th>",
+									"        <th>Compilation Name</th>",
+									"        <th>Reference Link</th>",
+									"        <th>Comment</th>",
+									"    </tr>",
+									"    ",
+									"    <tr>",
+									"        <td>{{response.0.priority}}</td>",
+									"        <td>{{response.0.compilationName}}</td>",
+									"        <td>{{response.0.referenceLink}}</td>",
+									"        <td>{{response.0.comment}}</td>",
+									"    </tr>",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}videos?page=0&size=5&sort=id,desc",
+							"host": [
+								"{{baseUrl}}videos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "First page (zero-based)\n"
+								},
+								{
+									"key": "size",
+									"value": "5",
+									"description": "Number of records per page\n"
+								},
+								{
+									"key": "sort",
+									"value": "id,desc",
+									"description": "Sort by id, descending"
+								},
+								{
+									"key": "priority",
+									"value": "HIGH",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "IN_PROGRESS",
+									"disabled": true
+								},
+								{
+									"key": "stage",
+									"value": "EDITING",
+									"disabled": true
+								},
+								{
+									"key": "directorName",
+									"value": "Sandji",
+									"disabled": true
+								},
+								{
+									"key": "editorName",
+									"value": "Dovydas",
+									"disabled": true
+								},
+								{
+									"key": "compilationName",
+									"value": "Compilation 9",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get video by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}videos/:id",
+							"host": [
+								"{{baseUrl}}videos"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tests by video id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}videos/:id/tests",
+							"host": [
+								"{{baseUrl}}videos"
+							],
+							"path": [
+								":id",
+								"tests"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get releases by video id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}videos/:id/releases",
+							"host": [
+								"{{baseUrl}}videos"
+							],
+							"path": [
+								":id",
+								"releases"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete video by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzQ0ODc4OTU2LCJleHAiOjE3NDQ5MDc3NTZ9.emr2aM-lZjDzamYG6IKKwNFv1o_RVM2GZyP4hpp-uxA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}videos/:id",
+							"host": [
+								"{{baseUrl}}videos"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create video",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filmingStart\": \"2025-04-17\",\n    \"editStart\": \"2025-04-30\",\n    \"stage\": \"DONE_FILMING\",\n    \"status\": \"EDITING\",\n    \"compilationName\": \"Compilation X\",\n    \"referenceLink\": \"https://www.example.com/video/X\",\n    \"comment\": \"Test video #X\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}videos",
+							"host": [
+								"{{baseUrl}}videos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update video by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzQ0ODc4OTU2LCJleHAiOjE3NDQ5MDc3NTZ9.emr2aM-lZjDzamYG6IKKwNFv1o_RVM2GZyP4hpp-uxA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"releases\": [\n        {\n            \"releaseDateTime\": \"2025-05-17T02:00:00\",\n            \"part\": 1\n        }\n    ],\n    \"tests\": [\n        {\n            \"version\": \"V1\",\n            \"retentionTime\": \"45s\",\n            \"retentionValue\": 60.66\n        }\n    ],\n    \"directorId\":\"1\",\n    \"editorId\":\"2\",\n    \"filmingStart\": \"2025-05-01\",\n    \"editStart\": \"2025-05-10\",\n    \"stage\": \"PREP\",\n    \"compilationName\": \"Compilation XX\",\n    \"referenceLink\": \"https://www.example.com/video/XX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}videos/:id",
+							"host": [
+								"{{baseUrl}}videos"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "41"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete multiple videos",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "random",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"from\":18,\n    \"to\":40\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}videos/delete-range",
+							"host": [
+								"{{baseUrl}}videos"
+							],
+							"path": [
+								"delete-range"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"editorial\",\n  \"password\": \"user\",\n  \"email\": \"editorial@test.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}users/register",
+							"host": [
+								"{{baseUrl}}users"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}users/:id",
+							"host": [
+								"{{baseUrl}}users"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}users",
+							"host": [
+								"{{baseUrl}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"user\",\n    \"role\":\"ROLE_EDITOR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}users/role",
+							"host": [
+								"{{baseUrl}}users"
+							],
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Director",
+			"item": [
+				{
+					"name": "get all directors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}directors",
+							"host": [
+								"{{baseUrl}}directors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create director",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Jonas\",\n        \"country\": \"Lithuania\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}directors/create",
+							"host": [
+								"{{baseUrl}}directors"
+							],
+							"path": [
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete director",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}directors/:id",
+							"host": [
+								"{{baseUrl}}directors"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Editor",
+			"item": [
+				{
+					"name": "get all editors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}editors",
+							"host": [
+								"{{baseUrl}}editors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create editor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Petras\",\n        \"isFreelancer\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}editors/create",
+							"host": [
+								"{{baseUrl}}editors"
+							],
+							"path": [
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete editor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01BTkFHRVIiXSwiaWF0IjoxNzQ0OTAyNjgzLCJleHAiOjE3NDQ5MzE0ODN9.9Ab6501CcuiYkUANkLmYpgMinyjrLZspMc23CspQ2dc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}editors/:id",
+							"host": [
+								"{{baseUrl}}editors"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authentication",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"random\",\n  \"password\": \"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseAuthUrl}}login",
+					"host": [
+						"{{baseAuthUrl}}login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/api",
+			"type": "default"
+		},
+		{
+			"key": "baseAuthUrl",
+			"value": "http://localhost:8080/api/auth/",
+			"type": "default"
+		}
+	]
+}
