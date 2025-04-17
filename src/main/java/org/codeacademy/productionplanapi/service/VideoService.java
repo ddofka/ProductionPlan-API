@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.codeacademy.productionplanapi.dto.update.DeleteVideosInRange;
 import org.codeacademy.productionplanapi.dto.update.UpdateVideoRequest;
-import org.codeacademy.productionplanapi.entity.TestInformation;
 import org.codeacademy.productionplanapi.entity.Video;
 import org.codeacademy.productionplanapi.enums.PostStatus;
 import org.codeacademy.productionplanapi.enums.Priority;
@@ -62,7 +61,7 @@ public class VideoService {
 
     public void removeVideoById(Long id) {
         if(!videoRepository.existsById(id)) {
-            throw new EntityNotFoundException("Employee with id: " + id + " not found");
+            throw new EntityNotFoundException("Video with id: " + id + " not found");
         }
         videoRepository.deleteById(id);
     }

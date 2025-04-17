@@ -20,7 +20,6 @@ import org.codeacademy.productionplanapi.enums.ProductionStage;
 import org.codeacademy.productionplanapi.mapper.ReleaseMapper;
 import org.codeacademy.productionplanapi.mapper.TestInformationMapper;
 import org.codeacademy.productionplanapi.mapper.VideoMapper;
-import org.codeacademy.productionplanapi.repository.TestInformationRepository;
 import org.codeacademy.productionplanapi.service.ReleaseService;
 import org.codeacademy.productionplanapi.service.TestInformationService;
 import org.codeacademy.productionplanapi.service.UserService;
