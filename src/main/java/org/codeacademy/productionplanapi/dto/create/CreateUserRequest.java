@@ -2,8 +2,6 @@ package org.codeacademy.productionplanapi.dto.create;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import org.codeacademy.productionplanapi.annotation.ValidEnum;
-import org.codeacademy.productionplanapi.enums.Role;
 import org.hibernate.validator.constraints.Length;
 
 public record CreateUserRequest(
@@ -15,8 +13,6 @@ public record CreateUserRequest(
         @Length(min = 4, max = 30)
         String password,
         @Email
-        String email,
-        @ValidEnum(enumClass = Role.class, message = "Invalid role")
-        Role role
+        String email
 
 ){}

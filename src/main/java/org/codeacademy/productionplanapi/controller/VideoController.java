@@ -54,7 +54,8 @@ public class VideoController {
     @Operation(summary = "Get all videos", description = "Retrieves filtered videos.")
     @ApiResponse(responseCode = "200", description = "Video by filter retrieved successfully")
     @ApiResponse(responseCode = "400", description = "Bad request")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @GetMapping
     public ResponseEntity<Page<GetVideoResponse>> getFilteredVideos(
             @RequestParam(required = false) PostStatus status,
@@ -77,7 +78,8 @@ public class VideoController {
     @Operation(summary = "Get video by id", description = "Retrieves a video by id.")
     @ApiResponse(responseCode = "200", description = "Video retrieved successfully")
     @ApiResponse(responseCode = "404", description = "No Video found")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @GetMapping("/{id}")
     public ResponseEntity<GetVideoResponse> getVideoById(@PathVariable Long id) {
         Video video = videoService.getVideoById(id);
@@ -88,7 +90,8 @@ public class VideoController {
     @Operation(summary = "Get video test by video id", description = "Retrieves a video tests by video id.")
     @ApiResponse(responseCode = "200", description = "Video tests retrieved successfully")
     @ApiResponse(responseCode = "404", description = "No Video tests found")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @GetMapping("/{id}/tests")
     public ResponseEntity<List<GetTestInformationResponse>> getTestsByVideoId(@PathVariable Long id) {
         Video video = videoService.getVideoById(id);
@@ -101,7 +104,8 @@ public class VideoController {
     @Operation(summary = "Get video releases by video id", description = "Retrieves a video release by video id.")
     @ApiResponse(responseCode = "200", description = "Video releases retrieved successfully")
     @ApiResponse(responseCode = "404", description = "No Video releases found")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @GetMapping("/{id}/releases")
     public ResponseEntity<List<GetReleaseResponse>> getReleasesByVideoId(@PathVariable Long id) {
         Video video = videoService.getVideoById(id);
@@ -114,7 +118,8 @@ public class VideoController {
     @Operation(summary = "Delete the video", description = "Deletes the video by ID.")
     @ApiResponse(responseCode = "204", description = "Video deleted successfully")
     @ApiResponse(responseCode = "404", description = "Video not found")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVideoById(@PathVariable Long id) {
         videoService.removeVideoById(id);
@@ -124,8 +129,9 @@ public class VideoController {
     @Operation(summary = "Delete the video", description = "Deletes the video by ID.")
     @ApiResponse(responseCode = "204", description = "Video deleted successfully")
     @ApiResponse(responseCode = "404", description = "Video not found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @DeleteMapping("/delete-range")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     public ResponseEntity<Void> deleteVideos(@RequestBody DeleteVideosInRange range) {
       videoService.removeVideos(range);
       return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -134,7 +140,8 @@ public class VideoController {
     @Operation(summary = "Create the video", description = "Creates the video from request.")
     @ApiResponse(responseCode = "201", description = "Video created successfully")
     @ApiResponse(responseCode = "400", description = "Invalid request body")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @PostMapping
     public ResponseEntity<GetVideoResponse> createVideo(@Valid @RequestBody CreateVideoRequest request) {
         Video video = videoMapper.dtoToVideo(request);
@@ -148,7 +155,8 @@ public class VideoController {
     @Operation(summary = "Update the video", description = "Updates the video from request by id.")
     @ApiResponse(responseCode = "200", description = "Video updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid request body")
-    @PreAuthorize("hasAnyRole('MANAGER', 'USER')")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @PatchMapping("/{id}")
     public ResponseEntity<GetVideoResponse> updateVideo(
             @PathVariable Long id,

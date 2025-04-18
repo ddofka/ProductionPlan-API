@@ -40,6 +40,7 @@ public class UserController {
     @Operation(summary = "Delete user by id", description = "Deletes user by ID.")
     @ApiResponse(responseCode = "204", description = "User deleted successfully")
     @ApiResponse(responseCode = "404", description = "User not found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
@@ -47,7 +48,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @Operation(summary = "Get all users", description = "Retrieves all users videos.")
+    @Operation(summary = "Get all users", description = "Retrieves all users.")
     @ApiResponse(responseCode = "200", description = "Users retrieved successfully")
     @ApiResponse(responseCode = "204", description = "No users found")
     @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
@@ -61,9 +62,10 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @Operation(summary = "Update the video", description = "Updates the video from request by id.")
-    @ApiResponse(responseCode = "200", description = "Video updated successfully")
+    @Operation(summary = "Assign role", description = "Assign role to user by username.")
+    @ApiResponse(responseCode = "200", description = "Role assigned successfully")
     @ApiResponse(responseCode = "400", description = "Invalid request body")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/role")
     public ResponseEntity<GetUserResponse> assignRoleToUser(@RequestBody UserRoleAssign request){

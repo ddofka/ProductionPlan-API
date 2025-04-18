@@ -26,6 +26,7 @@ public class DirectorController {
     @Operation(summary = "Get all directors", description = "Retrieves a list of all directors.")
     @ApiResponse(responseCode = "200", description = "List of directors retrieved successfully")
     @ApiResponse(responseCode = "204", description = "No directors found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @GetMapping
     public ResponseEntity<List<GetDirectorResponse>> getAllDirectors(){
@@ -39,6 +40,7 @@ public class DirectorController {
     @Operation(summary = "Create director", description = "Creates director from request.")
     @ApiResponse(responseCode = "201", description = "Director created successfully")
     @ApiResponse(responseCode = "400", description = "Invalid request body")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<GetDirectorResponse> createDirector(@RequestBody CreateDirectorRequest request){
@@ -50,6 +52,7 @@ public class DirectorController {
     @Operation(summary = "Delete director", description = "Deletes the director by ID.")
     @ApiResponse(responseCode = "204", description = "Director deleted successfully")
     @ApiResponse(responseCode = "404", description = "Director not found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDirectorById(@PathVariable Long id) {

@@ -26,6 +26,7 @@ public class EditorController {
     @Operation(summary = "Get all editors", description = "Retrieves a list of all editors.")
     @ApiResponse(responseCode = "200", description = "List of editors retrieved successfully")
     @ApiResponse(responseCode = "204", description = "No editors found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
     @GetMapping
     public ResponseEntity<List<GetEditorResponse>> getAllEditors(){
@@ -39,6 +40,7 @@ public class EditorController {
     @Operation(summary = "Create editor", description = "Creates editors from request.")
     @ApiResponse(responseCode = "201", description = "Editor created successfully")
     @ApiResponse(responseCode = "400", description = "Invalid request body")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<GetEditorResponse> createEditor(@RequestBody CreateEditorRequest request){
@@ -50,6 +52,7 @@ public class EditorController {
     @Operation(summary = "Delete editor", description = "Deletes the editor by ID.")
     @ApiResponse(responseCode = "204", description = "Editor deleted successfully")
     @ApiResponse(responseCode = "404", description = "Editor not found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEditorById(@PathVariable Long id) {
