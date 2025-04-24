@@ -73,4 +73,6 @@ public class UserController {
         GetUserResponse response = userMapper.userToDto(savedUser);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    //todo: add change password
 }
