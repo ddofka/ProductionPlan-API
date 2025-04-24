@@ -167,4 +167,6 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    //todo: to make sure that f.e edit start can't be before filming start etc.
+
 }

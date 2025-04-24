@@ -51,6 +51,7 @@ public class Video {
 
     private String compilationName;
     private String referenceLink;
+    //todo : change comment to referenceTitle
     private String comment;
 
 }
