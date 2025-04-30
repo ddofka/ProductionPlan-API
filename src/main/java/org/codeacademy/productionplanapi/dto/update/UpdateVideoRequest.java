@@ -1,5 +1,8 @@
 package org.codeacademy.productionplanapi.dto.update;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Positive;
@@ -18,26 +21,53 @@ public record UpdateVideoRequest(
 
         @Valid
         List<CreateReleaseRequest> releases,
+
         @Valid
         List<CreateTestInformationRequest> tests,
+
         @FutureOrPresent
         LocalDate filmingStart,
+        boolean clearFilmingStart,
+
         LocalDate editStart,
+        boolean clearEditStart,
+
         @Positive
         Long directorId,
+        boolean clearDirector,
+
         @Positive
         Long editorId,
-        @ValidEnum(enumClass = ProductionStage.class, message = "Invalid status")
+        boolean clearEditor,
+
+        @JsonSetter(nulls = Nulls.SKIP)
+        @ValidEnum(enumClass = ProductionStage.class, message = "Invalid stage")
+        @Nullable
         ProductionStage stage,
+        boolean clearStage,
+
+        @JsonSetter(nulls = Nulls.SKIP)
         @ValidEnum(enumClass = PostStatus.class, message = "Invalid status")
+        @Nullable
         PostStatus status,
+        boolean clearStatus,
+
+        @JsonSetter(nulls = Nulls.SKIP)
         @ValidEnum(enumClass = Priority.class, message = "Invalid status")
+        @Nullable
         Priority priority,
+        boolean clearPriority,
+
         @Length(min = 3, max = 60)
         String compilationName,
+        boolean clearCompilationName,
+
         @Length(min = 8, max = 150)
         String referenceLink,
+        boolean clearReferenceLink,
+
         @Length(min = 4, max = 300)
-        String comment
+        String comment,
+        boolean clearComment
 
 ){}

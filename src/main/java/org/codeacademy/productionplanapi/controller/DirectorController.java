@@ -5,7 +5,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.codeacademy.productionplanapi.dto.create.CreateDirectorRequest;
 import org.codeacademy.productionplanapi.dto.get.GetDirectorResponse;
+import org.codeacademy.productionplanapi.dto.get.GetEditorResponse;
 import org.codeacademy.productionplanapi.entity.Director;
+import org.codeacademy.productionplanapi.entity.Editor;
 import org.codeacademy.productionplanapi.mapper.DirectorMapper;
 import org.codeacademy.productionplanapi.service.DirectorService;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,18 @@ public class DirectorController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.ok(directors);
+    }
+
+    @Operation(summary = "Get Director by id", description = "Retrieves a director by id.")
+    @ApiResponse(responseCode = "200", description = "Director retrieved successfully")
+    @ApiResponse(responseCode = "404", description = "No Editor found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
+    @GetMapping("/{id}")
+    public ResponseEntity<GetDirectorResponse> getDirectorById(@PathVariable Long id){
+        Director director = directorService.findDirectorById(id);
+        GetDirectorResponse directorResponse = directorMapper.directorToDto(director);
+        return ResponseEntity.ok(directorResponse);
     }
 
     @Operation(summary = "Create director", description = "Creates director from request.")

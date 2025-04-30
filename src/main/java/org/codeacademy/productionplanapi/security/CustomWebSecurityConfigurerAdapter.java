@@ -31,17 +31,17 @@ public class CustomWebSecurityConfigurerAdapter {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(request ->
-                        request.requestMatchers("/api/public/**","/api/auth/**","/api/users/register")
-                                .permitAll()
-                                .anyRequest().authenticated())
-                .httpBasic(basic ->
-                        basic.authenticationEntryPoint(myBasicAuthenticationEntryPoint))
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .csrf(AbstractHttpConfigurer::disable);
-        http.cors(Customizer.withDefaults());
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/public/**", "/api/auth/**", "/api/users/register").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(Customizer.withDefaults())
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 

@@ -18,6 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 import static org.codeacademy.productionplanapi.spec.VideoSpecification.*;
 
 @Slf4j
@@ -97,42 +99,76 @@ public class VideoService {
             testInfoService.upodateTestInfos(videoFromDb, request.tests());
         }
 
-        if(request.filmingStart() != null && !videoFromDb.getFilmingStart().equals(request.filmingStart())) {
+        if (request.clearFilmingStart()){
+            videoFromDb.setFilmingStart(null);
+        }
+        else if(request.filmingStart() != null && !request.filmingStart().equals(videoFromDb.getFilmingStart())) {
             videoFromDb.setFilmingStart(request.filmingStart());
         }
 
-        if (request.editStart() != null && !videoFromDb.getEditStart().equals(request.editStart())) {
+        if (request.clearEditStart()){
+            videoFromDb.setEditStart(null);
+        }
+        else if (request.editStart() != null && !request.editStart().equals(videoFromDb.getEditStart())) {
             videoFromDb.setEditStart(request.editStart());
         }
 
-        if(request.directorId() != null && videoFromDb.getDirector() == null) {
+        if (request.clearDirector()){
+            videoFromDb.setDirector(null);
+        }
+        else if(request.directorId() != null && videoFromDb.getDirector() == null) {
             videoFromDb.setDirector(directorService.findDirectorById(request.directorId()));
         }
 
-        if(request.editorId() != null && videoFromDb.getEditor() == null) {
+        if (request.clearEditor()){
+            videoFromDb.setEditor(null);
+        }
+        else if(request.editorId() != null && videoFromDb.getEditor() == null) {
             videoFromDb.setEditor(editorService.findEditorById(request.editorId()));
         }
 
-        if (request.stage() != null && !videoFromDb.getStage().equals(request.stage())) {
+        if (request.clearStage()){
+            videoFromDb.setStage(null);
+        }
+        else if (request.stage() != null && !request.stage().equals(videoFromDb.getStage())) {
             videoFromDb.setStage(request.stage());
         }
 
-        if (request.priority() != null && !videoFromDb.getPriority().equals(request.priority())) {
+        if (request.clearStatus()){
+            videoFromDb.setStatus(null);
+        }
+        else if (request.status() != null && !request.status().equals(videoFromDb.getStatus())) {
+            videoFromDb.setStatus(request.status());
+        }
+        log.info("are we clearing priority: {}", request.clearPriority());
+        if (request.clearPriority()){
+            videoFromDb.setPriority(null);
+        }
+        else if (request.priority() != null && !request.priority().equals(videoFromDb.getPriority())) {
             videoFromDb.setPriority(request.priority());
         }
 
-        if (StringUtils.isNotBlank(request.compilationName())
-                && !videoFromDb.getCompilationName().equals(request.compilationName())) {
+        if (request.clearCompilationName()){
+            videoFromDb.setCompilationName(null);
+        }
+        else if (StringUtils.isNotBlank(request.compilationName())
+                && !request.compilationName().equals(videoFromDb.getCompilationName())) {
             videoFromDb.setCompilationName(request.compilationName());
         }
 
-        if (StringUtils.isNotBlank(request.referenceLink())
-                && !videoFromDb.getReferenceLink().equals(request.referenceLink())) {
+        if (request.clearReferenceLink()){
+            videoFromDb.setReferenceLink(null);
+        }
+        else if (StringUtils.isNotBlank(request.referenceLink())
+                && !request.referenceLink().equals(videoFromDb.getReferenceLink())) {
             videoFromDb.setReferenceLink(request.referenceLink());
         }
 
-        if (StringUtils.isNotBlank(request.comment())
-                && !videoFromDb.getComment().equals(request.comment())) {
+        if (request.clearComment()){
+            videoFromDb.setComment(null);
+        }
+        else if (StringUtils.isNotBlank(request.comment())
+                && !request.comment().equals(videoFromDb.getComment())) {
             videoFromDb.setComment(request.comment());
         }
 

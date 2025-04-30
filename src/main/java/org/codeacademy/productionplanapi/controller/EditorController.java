@@ -37,6 +37,18 @@ public class EditorController {
         return ResponseEntity.ok(editors);
     }
 
+    @Operation(summary = "Get Editor by id", description = "Retrieves a editor by id.")
+    @ApiResponse(responseCode = "200", description = "Editor retrieved successfully")
+    @ApiResponse(responseCode = "404", description = "No Editor found")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
+    @GetMapping("/{id}")
+    public ResponseEntity<GetEditorResponse> getEditorById(@PathVariable Long id){
+        Editor editor = editorService.findEditorById(id);
+        GetEditorResponse editorResponse = editorMapper.editorToDto(editor);
+        return ResponseEntity.ok(editorResponse);
+    }
+
     @Operation(summary = "Create editor", description = "Creates editors from request.")
     @ApiResponse(responseCode = "201", description = "Editor created successfully")
     @ApiResponse(responseCode = "400", description = "Invalid request body")

@@ -1,5 +1,8 @@
 package org.codeacademy.productionplanapi.dto.create;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,18 +18,31 @@ public record CreateVideoRequest (
         @NotNull
         @FutureOrPresent
         LocalDate filmingStart,
+
         LocalDate editStart,
-        @ValidEnum(enumClass = ProductionStage.class, message = "Invalid status")
+
+        @JsonSetter(nulls = Nulls.SKIP)
+        @ValidEnum(enumClass = ProductionStage.class, message = "Invalid stage")
+        @Nullable
         ProductionStage stage,
-        @ValidEnum(enumClass = PostStatus.class, message = "Invalid status")
+
+        @JsonSetter(nulls = Nulls.SKIP)
+        @ValidEnum(enumClass = PostStatus.class, message = "Invalid stage")
+        @Nullable
         PostStatus status,
-        @ValidEnum(enumClass = Priority.class, message = "Invalid status")
+
+        @JsonSetter(nulls = Nulls.SKIP)
+        @ValidEnum(enumClass = Priority.class, message = "Invalid stage")
+        @Nullable
         Priority priority,
+
         @NotBlank
         @Length(min = 3, max = 60)
         String compilationName,
+
         @Length(min = 8, max = 150)
         String referenceLink,
+
         @Length(min = 4, max = 300)
         String comment
 
