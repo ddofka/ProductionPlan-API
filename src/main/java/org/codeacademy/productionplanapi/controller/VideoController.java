@@ -76,8 +76,8 @@ public class VideoController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Get all videos", description = "Retrieves filtered videos.")
-    @ApiResponse(responseCode = "200", description = "Video by filter retrieved successfully")
+    @Operation(summary = "Get all videos", description = "Retrieves all videos.")
+    @ApiResponse(responseCode = "200", description = "Video retrieved successfully")
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
