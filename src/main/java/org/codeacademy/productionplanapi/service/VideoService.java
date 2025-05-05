@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 import static org.codeacademy.productionplanapi.spec.VideoSpecification.*;
@@ -175,4 +176,7 @@ public class VideoService {
         return addVideo(videoFromDb);
     }
 
+    public List<Video> getAllVideos() {
+        return videoRepository.findAll();
+    }
 }
