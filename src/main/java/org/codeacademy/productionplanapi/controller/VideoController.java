@@ -41,6 +41,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/videos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class VideoController {
 
     private final VideoService videoService;
@@ -73,6 +74,20 @@ public class VideoController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Get all videos", description = "Retrieves filtered videos.")
+    @ApiResponse(responseCode = "200", description = "Video by filter retrieved successfully")
+    @ApiResponse(responseCode = "400", description = "Bad request")
+    @ApiResponse(responseCode = "401", description = "Full authentication is required to access this resource")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN','USER')")
+    @GetMapping("/json")
+    public ResponseEntity<List<GetVideoResponse>> getAllVideos() {
+        List<GetVideoResponse> videos = videoMapper.videoListToDto(videoService.getAllVideos());
+        if (videos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.ok(videos);
     }
 
     @Operation(summary = "Get video by id", description = "Retrieves a video by id.")
